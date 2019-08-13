@@ -14,28 +14,30 @@
 class NameForm extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+        arr: [1,2,3]
+    };
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.input = React.createRef();
-  }
-  
-  componentDidMount() {
-    this.input.current.focus()
   }
 
   handleSubmit(event) {
-    alert('A name was submitted: ' + this.input.current.value);
+    alert('changing')
+    let arr = this.state.arr;
+    arr.push(4)
+    this.setState({
+        arr
+    })
     event.preventDefault();
   }
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
-        <label>
-          Name:
-          <input type="text" ref={this.input} />
-        </label>
-        <input type="submit" value="Submit" />
-      </form>
+      <div>
+      <ul>
+        {this.state.arr.map(item=><li key={item}>{item}</li>)}
+      </ul>
+      <button onClick={this.handleSubmit}>change it</button>
+      </div>
     );
   }
 }
